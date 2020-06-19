@@ -1,0 +1,2 @@
+# yafarayServer
+YafaraySever
