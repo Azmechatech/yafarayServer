@@ -1,4 +1,4 @@
-# yafarayServer
+# YafarayServer for remote computing
 YafaraySever
 
 To run server(shell):
