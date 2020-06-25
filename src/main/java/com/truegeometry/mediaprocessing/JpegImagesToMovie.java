@@ -361,7 +361,7 @@ public class JpegImagesToMovie implements ControllerListener, DataSinkListener {
         JpegImagesToMovie imageToMovie = new JpegImagesToMovie();
         imageToMovie.doIt(indexJSONFile.getInt("width"), indexJSONFile.getInt("height"), indexJSONFile.getInt("frameRate"), inputFiles, oml);
         //Move movis to folder
-        copyFile(outputURL, indexFile.getParentFile().getAbsolutePath()+"preview.mov" );
+        copyFile(outputURL, indexFile.getParentFile().getAbsolutePath()+"F"+indexJSONFile.getInt("frameRate")+"_"+indexJSONFile.getInt("width")+"x"+indexJSONFile.getInt("height")+"preview.mov" );
     }
     
     public static void copyFile(String from, String to) throws IOException{

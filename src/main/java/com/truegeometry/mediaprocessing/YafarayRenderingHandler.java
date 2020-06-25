@@ -94,7 +94,7 @@ public class YafarayRenderingHandler extends CustomHandler {
             //Then render //Always overwrites previous one.//Intended for single threaded computing.
             String outPutPath = "yaftemp/"+modelSessionKey+"/TGCMP.jpg";
             RenderingHelper.YafarayXMLRender(yafarayPath+" -f jpg -op yaftemp/"+modelSessionKey, "\"" + yafScene.getAbsolutePath() + "\" \"TGCMP\"", true);
-
+            yafScene.delete();//Delete generated XML
             BufferedImage bImage = ImageIO.read(new File(outPutPath));
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(bImage, "jpg", bos);
