@@ -6,14 +6,18 @@
 package com.truegeometry.mediaprocessing;
 
 import com.sun.net.httpserver.HttpServer;
+import com.truegeometry.parquet.ObjParquetHelper;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.URL;
 import java.util.concurrent.ForkJoinPool;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONObject;
 
 /**
@@ -51,10 +55,17 @@ public class Server {
             selfPublicURL = args[4];
         }
         
+        
+          try {//To load necessary libraries...
+            ObjParquetHelper.main(new String[]{});
+        } catch (IOException ex) {
+            Logger.getLogger(ParquetWriteHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/", new SimpleHTTPHandler());
         server.createContext("/yafaray", new YafarayRenderingHandler(yafarayPath));
+        server.createContext("/store", new ParquetWriteHandler(yafarayPath));
         server.createContext("/register", new ServerRegistrationHandler());
         server.createContext("/servers", new ActiveServerHandler());
 
